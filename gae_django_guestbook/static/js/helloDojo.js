@@ -8,19 +8,19 @@ define([
 	'dojo/_base/window'
 ], function (dom, domConstruct, win) {
 
-	var greatingString = null;
+	var greetingString = null;
 
 	return {
 		setText: function (text) {
-			greatingString = text;
+			greetingString = text;
 		},
 
 		getText: function () {
-			return greatingString;
+			return greetingString;
 		},
 
 		alert: function () {
-			alert(greatingString);
+			alert(greetingString);
 		},
 
 		print: function () {
