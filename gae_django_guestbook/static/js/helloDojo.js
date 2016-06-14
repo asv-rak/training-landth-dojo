@@ -3,10 +3,12 @@
  */
 
 define([
-    'dojo/dom'
-], function(dom){
+    'dojo/dom',
+    'dojo/dom-construct',
+    'dojo/_base/window'
+], function(dom, domConstruct, win){
 
-    var greatingString = "n/a";
+    var greatingString = null;
 
     return {
         setText: function(text){
@@ -15,8 +17,15 @@ define([
         getText: function(){
             return greatingString;
         },
-        print: function (id, text) {
+        alert: function () {
             alert(greatingString);
+        },
+        print: function(){
+            domConstruct.create(
+                'div',
+                { innerHTML: this.getText(), style: {color: 'green', fontSize: '30px', fontWeight: 'bold'} },
+                win.body()
+            );
         }
     };
 });

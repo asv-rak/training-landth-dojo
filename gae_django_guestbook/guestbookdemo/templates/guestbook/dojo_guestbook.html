@@ -25,15 +25,11 @@
             data-dojo-config="async: true"></script>
 
 <script>
-    require(['greating/helloDojo','dojo/dom-construct','dojo/_base/window'], function(greating, domConstruct, win){
-        greating.setText("Hello Dojo");
-        //greating.print();
+    require(['greating/helloDojo'], function(greating){
+        greating.setText('Hello Dojo');
 
-        var n = domConstruct.create(
-            "div",
-            { innerHTML: greating.getText(), style: {color: 'green', fontSize: '30px', fontWeight: 'bold'} },
-            win.body()
-        );
+        greating.print();
+
     });
 </script>
 </body>
