@@ -15,7 +15,7 @@
 		async: true,
 		packages: [{
 			name: 'greeting',
-			location: '/static/js',
+			location: '/static/js'
 		}]
 	}
 </script>
@@ -27,7 +27,6 @@
 <script>
 	require(['greeting/helloDojo'], function (greeting) {
 		greeting.setText('Hello Dojo');
-
 		greeting.print();
 
 	});

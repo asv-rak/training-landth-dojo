@@ -25,16 +25,16 @@ define([
 
 		print: function () {
 			domConstruct.create(
-					'div',
-					{
-						innerHTML: this.getText(),
-						style: {
-							color: 'green',
-							fontSize: '30px',
-							fontWeight: 'bold'
-						}
-					},
-					win.body()
+				'div',
+				{
+					innerHTML: this.getText(),
+					style: {
+						color: 'green',
+						fontSize: '30px',
+						fontWeight: 'bold'
+					}
+				},
+				win.body()
 			);
 		}
 	};
