@@ -11,20 +11,29 @@
 <a href="{{ url }}">{{ url_linktext }}</a>
 
 <script>
-
+    var dojoConfig = {
+        async: true,
+        packages: [{
+            name: 'greating',
+            location: '/static/js',
+        }]
+    }
 </script>
 
 <!-- load dojo -->
 <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
-            data-dojo-config="async: true, packages: [ {
-            name: 'greating',
-            location: '/static/js'
-        } ]"></script>
+            data-dojo-config="async: true"></script>
 
 <script>
-    require(['greating/helloDojo'], function(greating){
+    require(['greating/helloDojo','dojo/dom-construct','dojo/_base/window'], function(greating, domConstruct, win){
         greating.setText("Hello Dojo");
-        greating.print();
+        //greating.print();
+
+        var n = domConstruct.create(
+            "div",
+            { innerHTML: greating.getText(), style: {color: 'green', fontSize: '30px', fontWeight: 'bold'} },
+            win.body()
+        );
     });
 </script>
 </body>
