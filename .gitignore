@@ -2,7 +2,7 @@
 build/
 .idea
 *.pyc
-
+Dojo/
 # Ignore Gradle GUI config
 gradle-app.setting
 
