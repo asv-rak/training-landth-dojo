@@ -1,23 +1,18 @@
 <div class="mainWidget">
-	<div class="${accessClass}Wrap">
-		<label>Control: </label>
-		<a href="#" id="${accessClass}Login">Login</a>
-		<a href="#" id="${accessClass}ogout">Logout</a>
-	</div>
 	<form class="${greetingClass}Wrap">
 		<h2>Add new Greeting</h2>
-		<label>GuestBook Name: </label><select data-dojo-attach-point="gbNameListNode" title="Guestbook Name"><option></option></select>
-		<label>Greeting: </label><input class="${greetingClass}Input" name="${contentLabel}" value="${greetingContent}" placeholder="input text greeting"/>
-		<input type="submit" name="s_add" value="Add" />
+		<label>GuestBook Name: </label><select data-dojo-attach-point="guestBookNameListNode" title="Guestbook Name"></select>
+		<label>Greeting: </label><input data-dojo-attach-point="inputGreeting"  name="inputGreeting" value="${greetingContent}" placeholder="input text greeting"/>
+		<input type="submit" name="btnSubmit" value="Add" />
 	</form>
-	<div class="${gbClass}Wrap">
+	<div class="${guestBookClass}Wrap">
 		<h2>List Greeting</h2>
-		<form id="${gbClass}Form">
-			<input placeholder="Guestbook name" name="${contentLabel}" value="${guestBookName}"/>
-			<input type="submit" name="s_list" value="Switch" />
+		<form id="${guestBookClass}Form">
+			<input placeholder="Guestbook name" data-dojo-attach-point="inputGuestBookName" name="inputGuestBookName" value="${guestBookName}"/>
+			<input type="submit" name="btnSubmit" value="Switch"/>
 		</form>
-		<div class="${gbClass}List">
-			<ul>
+		<div class="${guestBookClass}List">
+			<ul data-dojo-attach-point="greetingListNode">
 				<li>
 					greeting 1
 				</li>
@@ -27,5 +22,4 @@
 			</ul>
 		</div>
 	</div>
-
 </div>

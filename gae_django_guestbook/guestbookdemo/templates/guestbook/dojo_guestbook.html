@@ -16,6 +16,8 @@
 <script>
 	var dojoConfig = {
 		async: true,
+		isDebug: true,
+		parseOnLoad: true,
 		packages: [{
 			name: 'greeting',
 			location: '/static/js'
@@ -24,19 +26,17 @@
 </script>
 
 <!-- load dojo -->
-<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
-		data-dojo-config="isDebug: 1, async: 1, parseOnLoad: 1"></script>
+<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
 
 <script>
-
 	require([
 		"dojo/parser",
-		"greeting/guestBookWidget"
+		"greeting/GuestBookView"
 	], function (parser) {
 		parser.parse();
 	});
 </script>
 
-<div data-dojo-type="greeting/guestBookWidget"></div>
+<div data-dojo-type="greeting/GuestBookView"></div>
 </body>
 </html>
