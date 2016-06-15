@@ -1,0 +1,31 @@
+<div class="mainWidget">
+	<div class="${accessClass}Wrap">
+		<label>Control: </label>
+		<a href="#" id="${accessClass}Login">Login</a>
+		<a href="#" id="${accessClass}ogout">Logout</a>
+	</div>
+	<form class="${greetingClass}Wrap">
+		<h2>Add new Greeting</h2>
+		<label>GuestBook Name: </label><select data-dojo-attach-point="gbNameListNode" title="Guestbook Name"><option></option></select>
+		<label>Greeting: </label><input class="${greetingClass}Input" name="${contentLabel}" value="${greetingContent}" placeholder="input text greeting"/>
+		<input type="submit" name="s_add" value="Add" />
+	</form>
+	<div class="${gbClass}Wrap">
+		<h2>List Greeting</h2>
+		<form id="${gbClass}Form">
+			<input placeholder="Guestbook name" name="${contentLabel}" value="${guestBookName}"/>
+			<input type="submit" name="s_list" value="Switch" />
+		</form>
+		<div class="${gbClass}List">
+			<ul>
+				<li>
+					greeting 1
+				</li>
+				<li>
+					greeting 2
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>

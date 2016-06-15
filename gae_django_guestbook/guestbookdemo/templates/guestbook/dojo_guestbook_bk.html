@@ -4,9 +4,6 @@
 	<title>Dojo guestbook</title>
 	<link rel="stylesheet"
 		  href="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dijit/themes/claro/claro.css"/>
-	<style type="text/css">
-		@import "/static/stylesheets/myStyle.css";
-	</style>
 </head>
 <body>
 <h1>Guestbook - Dojo</h1>
@@ -25,18 +22,14 @@
 
 <!-- load dojo -->
 <script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"
-		data-dojo-config="isDebug: 1, async: 1, parseOnLoad: 1"></script>
+		data-dojo-config="async: true"></script>
 
 <script>
+	require(['greeting/helloDojo'], function (greeting) {
+		greeting.setText('Hello Dojo');
+		greeting.print();
 
-	require([
-		"dojo/parser",
-		"greeting/guestBookWidget"
-	], function (parser) {
-		parser.parse();
 	});
 </script>
-
-<div data-dojo-type="greeting/guestBookWidget"></div>
 </body>
 </html>
