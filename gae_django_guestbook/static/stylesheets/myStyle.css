@@ -1,20 +1,20 @@
-.mainWidget{
+.MainWidget{
 	padding: 20px;
 }
 
-.greetingWidget{
+.GreetingWidget{
 	padding: 10px;
 	border: 2px solid #4a7fa0;
 	max-width: 300px;
 	margin: 10px 0;
 }
 
-.greetingWidget label{
+.GreetingWidget label{
 	color: #4a7fa0;
 	font-size: 12px;
 }
 
-.greetingWidget span{
+.GreetingWidget span{
 	color: #466980;
 	background: #d4f1ff;
 	border-radius: 5px;
@@ -22,7 +22,7 @@
 	font-style: italic;
 }
 
-.greetingWidget .greetingContent{
+.GreetingWidget .GreetingContent{
 	margin:5px;
 	padding: 5px;
 	background: #e6e8e8;

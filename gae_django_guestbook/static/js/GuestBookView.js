@@ -15,8 +15,8 @@ define([
 
 		currentGuestBookName: '',
 
-		greetingClass: 'greeting',
-		guestBookClass: 'guestbook',
+		greetingClass: 'Greeting',
+		guestBookClass: 'Guestbook',
 		contentLabel: 'dataInput',
 
 		greetingContent: '',
@@ -27,35 +27,9 @@ define([
 		},
 
 		initGuestBook: function () {
-			var guestBookList = [
-				{
-					guestBookName: '1', greetingList: [
-						{content: 'guestbook 01 - greeting 01'},
-						{content: 'guestbook 01 - greeting 02'}
-					]
-				},
-				{
-					guestBookName: '2', greetingList: [
-					{content: 'guestbook 02 - greeting 01'}
-				]
-				},
-				{guestBookName: '3', greetingList: []},
-				{
-					guestBookName: '4', greetingList: [
-					{content: 'guestbook 04 - greeting 01'}
-				]
-				},
-				{
-					guestBookName: '5', greetingList: [
-					{content: 'guestbook 05 - greeting 01'},
-					{content: 'guestbook 05 - greeting 02'},
-					{content: 'guestbook 05 - greeting 03'}
-				]
-				}
-			];
 
-			for (var i = 0; i < guestBookList.length; i++) {
-				var option = this.guestBookNameListNode.appendChild(domConstruct.toDom('<option>' + guestBookList[i].guestBookName + '</option>'));
+			for (var i = 1; i <= 10; i++) {
+				var option = this.guestBookNameListNode.appendChild(domConstruct.toDom('<option>' + i + '</option>'));
 			}
 
 			for (var i = 1; i <= 10; i++) {
