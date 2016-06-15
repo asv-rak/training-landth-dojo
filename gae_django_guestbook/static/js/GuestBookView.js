@@ -9,7 +9,7 @@ define([
 	"greeting/GreetingWidget"
 ], function (declare, _ViewBase, template, domConstruct, _GreetingWidget) {
 
-	return declare([_ViewBase], {
+	return declare('guestbook.GuestBookView', [_ViewBase], {
 
 		templateString: template,
 
