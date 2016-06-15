@@ -5,9 +5,8 @@ define([
 	"dojo/_base/declare",
 	"greeting/_ViewBase",
 	"dojo/text!./templates/guestBookWidget.html",
-	"dojo/dom-construct",
-	"greeting/Greeting"
-], function (declare, _ViewBase, template, domConstruct, _Greeting) {
+	"dojo/dom-construct"
+], function (declare, _ViewBase, template, domConstruct) {
 
 	return declare([_ViewBase], {
 
