@@ -5,8 +5,9 @@ define([
 	"dojo/_base/declare",
 	"greeting/_ViewBase",
 	"dojo/text!./templates/guestBookWidget.html",
-	"dojo/dom-construct"
-], function (declare, _ViewBase, template, domConstruct) {
+	"dojo/dom-construct",
+	"greeting/GreetingWidget"
+], function (declare, _ViewBase, template, domConstruct, _GreetingWidget) {
 
 	return declare([_ViewBase], {
 
@@ -53,11 +54,19 @@ define([
 				}
 			];
 
-			var selectNode = this.guestBookNameListNode;
 			for (var i = 0; i < guestBookList.length; i++) {
-				var option = selectNode.appendChild(domConstruct.toDom('<option>' + guestBookList[i].guestBookName + '</option>'));
+				var option = this.guestBookNameListNode.appendChild(domConstruct.toDom('<option>' + guestBookList[i].guestBookName + '</option>'));
 			}
 
+			for (var i = 1; i <= 10; i++) {
+				var greetingWidget = new _GreetingWidget({
+					createdTime: '2015/06/' + i,
+					updatedTime: '2016/06/' + i,
+					createdUser: 'User Test ' + i,
+					updatedUser: 'User Test ' + i
+				});
+				domConstruct.place(greetingWidget.domNode, this.greetingWidget);
+			}
 
 		}
 	});

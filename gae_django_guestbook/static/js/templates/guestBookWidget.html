@@ -11,15 +11,6 @@
 			<input placeholder="Guestbook name" data-dojo-attach-point="inputGuestBookName" name="inputGuestBookName" value="${guestBookName}"/>
 			<input type="submit" name="btnSubmit" value="Switch"/>
 		</form>
-		<div class="${guestBookClass}List">
-			<ul data-dojo-attach-point="greetingListNode">
-				<li>
-					greeting 1
-				</li>
-				<li>
-					greeting 2
-				</li>
-			</ul>
-		</div>
+		<div class="${guestBookClass}List" data-dojo-attach-point="greetingWidget"></div>
 	</div>
 </div>
