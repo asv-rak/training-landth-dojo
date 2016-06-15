@@ -27,7 +27,6 @@ define([
 		},
 
 		initGuestBook: function () {
-			var greeting_01 = new _Greeting('1', 'guestbook 01 - greeting 01');
 			var guestBookList = [
 				{
 					guestBookName: '1', greetingList: [
