@@ -12,7 +12,8 @@
 <h1>Guestbook - Dojo</h1>
 <br>
 <a href="{{ url }}">{{ url_linktext }}</a>
-
+<input type="hidden" id="isUseLogin" value="{{ user_login }}"/>
+<input type="hidden" id="isUserAdmin" value="{{ is_user_admin }}"/>
 <script>
 	var dojoConfig = {
 		async: true,

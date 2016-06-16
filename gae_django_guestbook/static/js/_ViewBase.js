@@ -8,9 +8,9 @@ define([
 	"dijit/_WidgetBase",
 	"dijit/_TemplatedMixin",
 	"dijit/_WidgetsInTemplateMixin"
-], function (declare, domClass, _WidgetBase, _WidgetsInTemplateMixin, _TemplatedMixin) {
+], function (declare, domClass, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin) {
 
-	return declare([_WidgetBase, _WidgetsInTemplateMixin, _TemplatedMixin], {
+	return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
 
 		buildRendering: function() {
 			this.inherited(arguments);
