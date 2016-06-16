@@ -3,11 +3,18 @@
  */
 define([
 	"dojo/_base/declare",
+	"dojo/_base/lang",
 	"greeting/_ViewBase",
-	"dojo/text!./templates/guestBookWidget.html",
+	"dojo/text!./templates/guestBookView.html",
 	"dojo/dom-construct",
-	"greeting/GreetingWidget"
-], function (declare, _ViewBase, template, domConstruct, _GreetingWidget) {
+	"dojo/dom",
+	"dojo/on",
+	"greeting/GreetingWidget",
+	"dojo/request",
+	"dojo/cookie",
+	"dojo/store/JsonRest",
+	"dijit/form/TextBox"
+], function (declare, lang, _ViewBase, template, domConstruct, dom, on, _GreetingWidget, request, cookie, JsonRest) {
 
 	return declare([_ViewBase], {
 
@@ -20,28 +27,53 @@ define([
 		contentLabel: 'dataInput',
 
 		greetingContent: '',
-		guestBookName: '',
+		guestBookName: 'default_guestbook',
+		store: '',
 
 		postCreate: function () {
 			this.initGuestBook();
+
+			on(this.btnSwitch, "click", lang.hitch(this, 'processSearch'));
 		},
 
 		initGuestBook: function () {
-
 			for (var i = 1; i <= 10; i++) {
 				var option = this.guestBookNameListNode.appendChild(domConstruct.toDom('<option>' + i + '</option>'));
 			}
 
-			for (var i = 1; i <= 10; i++) {
-				var greetingWidget = new _GreetingWidget({
-					createdTime: '2015/06/' + i,
-					updatedTime: '2016/06/' + i,
-					createdUser: 'User Test ' + i,
-					updatedUser: 'User Test ' + i
-				});
-				domConstruct.place(greetingWidget.domNode, this.greetingWidget);
-			}
+			this.store = new JsonRest({});
+			var url = '/api/guestbook/default_guestbook/greeting/';
+			this.loadGreetingList(url);
+		},
 
+		processSearch: function(){
+			var url = '/api/guestbook/'+ ( (this.inputGuestBookName.get("value")) ? this.inputGuestBookName.get("value") : '0' ) +'/greeting/';
+			this.loadGreetingList(url);
+		},
+
+		loadGreetingList: function(url){
+			this.store.target = url;
+			this.store.headers = {"X-CSRFToken": cookie("csrftoken")};
+			var greetingArea = this.greetingWidget;
+			greetingArea.innerHTML = '';
+			var greeting = this.numGreeting;
+			this.store.query().then(function (results) {
+				greeting.innerHTML = results.greetings.length + ' Items';
+				if(results.greetings){
+					for(var i = 0; i < results.greetings.length; i++){
+						var greetingWidget = new _GreetingWidget({
+							content: ((results.greetings[i].content) ? results.greetings[i].content : ''),
+							createdTime: ((results.greetings[i].date) ? results.greetings[i].date : ''),
+							updatedTime: ((results.greetings[i].date) ? results.greetings[i].date : ''),
+							createdUser: ((results.greetings[i].user) ? results.greetings[i].user : ''),
+							updatedUser: ((results.greetings[i].user) ? results.greetings[i].user : '')
+						});
+						domConstruct.place(greetingWidget.domNode, greetingArea);
+					}
+				}
+			});
 		}
+
+
 	});
 });

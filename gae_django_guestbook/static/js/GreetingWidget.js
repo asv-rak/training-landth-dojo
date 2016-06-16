@@ -13,6 +13,7 @@ define([
 		updatedTime: '',
 		createdUser: '',
 		updatedUser: '',
+		content: '',
 
 		constructor: function() {
 			this.inherited(arguments);

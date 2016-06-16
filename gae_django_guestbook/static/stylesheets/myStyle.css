@@ -5,16 +5,16 @@
 .GreetingWidget{
 	padding: 10px;
 	border: 2px solid #4a7fa0;
-	max-width: 300px;
+	max-width: 350px;
 	margin: 10px 0;
 }
 
-.GreetingWidget label{
+.ResultInfo label, .GreetingWidget label{
 	color: #4a7fa0;
 	font-size: 12px;
 }
 
-.GreetingWidget span{
+.ResultInfo span, .GreetingWidget span{
 	color: #466980;
 	background: #d4f1ff;
 	border-radius: 5px;
@@ -29,4 +29,13 @@
 	font-size: 14px;
 }
 
-.guestbookList{}
+.GuestbookList{
+	height: 300px;
+	overflow-y: auto;
+	max-width: 400px;
+	margin: 5px 0;
+}
+
+.ResultInfo{
+	padding-top: 5px;
+}
