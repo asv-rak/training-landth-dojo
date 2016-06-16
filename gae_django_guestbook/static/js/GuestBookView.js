@@ -16,7 +16,7 @@ define([
 	"dijit/form/TextBox"
 ], function (declare, lang, _ViewBase, template, domConstruct, dom, on, _GreetingWidget, request, cookie, JsonRest) {
 
-	return declare([_ViewBase], {
+	return declare('guestbook.GuestBookView', [_ViewBase], {
 
 		templateString: template,
 
