@@ -5,7 +5,7 @@ define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"greeting/_ViewBase",
-	"dojo/text!./templates/guestBookView.html",
+	"dojo/text!./templates/GuestBookView.html",
 	"dojo/dom-construct",
 	"dojo/dom",
 	"dojo/on",

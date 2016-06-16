@@ -5,7 +5,7 @@ define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
 	"greeting/_ViewBase",
-	"dojo/text!./templates/greetingWidget.html",
+	"dojo/text!./templates/GreetingWidget.html",
 	"dojo/on",
 	"dojo/dom",
 	"dojo/dom-style",
