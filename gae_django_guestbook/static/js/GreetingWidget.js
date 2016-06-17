@@ -4,15 +4,15 @@
 define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
-	"greeting/_ViewBase",
-	"dojo/text!./templates/GreetingWidget.html",
 	"dojo/on",
 	"dojo/dom",
 	"dojo/dom-style",
 	"dojo/dom-attr",
 	"dijit/registry",
-	"dijit/form/TextBox"
-], function (declare, lang, _ViewBase, template, on, dom, domStyle, domAttr, registry) {
+	"dijit/form/TextBox",
+	"greeting/_ViewBase",
+	"dojo/text!./templates/GreetingWidget.html",
+], function (declare, lang, on, dom, domStyle, domAttr, registry, TextBox, _ViewBase, template) {
 
 	return declare('guestbook.GreetingWidget', [_ViewBase], {
 		templateString: template,

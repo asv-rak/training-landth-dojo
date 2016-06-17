@@ -4,23 +4,19 @@
 define([
 	"dojo/_base/declare",
 	"dojo/_base/lang",
-	"greeting/_ViewBase",
-	"dojo/text!./templates/GuestBookView.html",
 	"dojo/dom-construct",
 	"dojo/dom",
 	"dojo/on",
-	"greeting/GreetingWidget",
-	"dojo/request",
-	"dojo/cookie",
 	"dojo/store/JsonRest",
-	"dojo/Deferred",
+	"dijit/form/TextBox",
+	"greeting/_ViewBase",
+	"greeting/GreetingWidget",
 	"greeting/GreetingStore",
-	"dijit/form/TextBox"
-], function (declare, lang, _ViewBase, template, domConstruct, dom, on, _GreetingWidget,
-			 request, cookie, JsonRest, Deferred, GreetingStore) {
+	"dojo/text!./templates/GuestBookView.html"
+], function (declare, lang, domConstruct, dom, on, JsonRest, TextBox,
+			 _ViewBase, _GreetingWidget, GreetingStore, template) {
 
 	return declare('guestbook.GuestBookView', [_ViewBase], {
-
 
 		templateString: template,
 
