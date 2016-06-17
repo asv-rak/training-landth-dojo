@@ -35,7 +35,7 @@ define([
 		GreetingStore: '',
 
 		postCreate: function () {
-
+			this.inherited(arguments);
 			this.initGuestBook();
 			on(this.btnSwitch, "click", lang.hitch(this, 'processSearch'));
 			on(this.btnAdd, "click", lang.hitch(this, 'processAdd'));
@@ -48,7 +48,7 @@ define([
 		},
 
 		getGuestBookName: function (isDefault) {
-			var tmpGuestBookName = (isDefault == true) ? 'default_guestbook' : '0';
+			var tmpGuestBookName = isDefault ? 'default_guestbook' : '0';
 			return (this.inputGuestBookName.get("value") ?
 				this.inputGuestBookName.get("value") : tmpGuestBookName );
 		},
