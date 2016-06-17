@@ -11,8 +11,9 @@ define([
 	"dijit/registry",
 	"dijit/form/TextBox",
 	"greeting/_ViewBase",
+	"greeting/GreetingStore",
 	"dojo/text!./templates/GreetingWidget.html"
-], function (declare, lang, on, dom, domStyle, domAttr, registry, TextBox, _ViewBase, template) {
+], function (declare, lang, on, dom, domStyle, domAttr, registry, TextBox, _ViewBase, GreetingStore, template) {
 
 	return declare('guestbook.GreetingWidget', [_ViewBase], {
 		templateString: template,
@@ -60,7 +61,35 @@ define([
 			domStyle.set(this.btnCancel, "display", display ? "inline-block" : "none");
 		},
 
+		processCreate: function(obj, callback){
+			if (obj.guestBookName.length == 0 || obj.textGreeting.length == 0) {
+				alert("Please Input data");
+				return false;
+			}
+			if (obj.guestBookName.length > 10 || obj.textGreeting.length > 10) {
+				alert("The text - Maximun is 10");
+				return false;
+			}
+
+			var _greetingStore = new GreetingStore();
+			var _this = this;
+
+			_greetingStore._addGreeting({
+				guestBookName: obj.guestBookName,
+				textGreeting: obj.textGreeting
+			}, function (error, data) {
+				if(error){
+					alert("Add Greeting fail");
+					callback(true, null);
+				}else{
+					alert("Add Greeting successful");
+					callback(null, data);
+				}
+			});
+		},
+
 		processDelete: function () {
+			var _greetingStore = new GreetingStore();
 			var _this = this;
 			if (dom.byId('isUserAdmin').value != 'True') {
 				alert("You can not delete");
@@ -68,7 +97,7 @@ define([
 			}
 			var isDelete = confirm("Do you want to delete this greeting?");
 			if (isDelete == true) {
-				_this._GuestBookViewObj.GreetingStore._deleteGreeting({
+				_greetingStore._deleteGreeting({
 					guestBookName: _this.guestBookName,
 					id_greeting: _this.id_greeting
 				}, function (error, results) {
@@ -82,9 +111,10 @@ define([
 		},
 
 		processUpdate: function () {
+			var _greetingStore = new GreetingStore();
 			var _this = this;
 			if (_this.contentEditNode.get('value').length > 0 && _this.contentEditNode.get('value').length <= 10) {
-				_this._GuestBookViewObj.GreetingStore._updateGreeting({
+				_greetingStore._updateGreeting({
 					guestBookName: _this.guestBookName,
 					id_greeting: _this.id_greeting,
 					textGreeting: _this.contentEditNode.get('value')

@@ -51,23 +51,14 @@ define([
 
 		processAdd: function () {
 			var _this = this;
-			if (_this.signGuestBookName.get('value').length == 0 || _this.inputGreeting.get('value').length == 0) {
-				alert("Please Input data");
-				return false;
-			}
-			if (_this.signGuestBookName.get('value').length > 10 || _this.inputGreeting.get('value').length > 10) {
-				alert("The text - Maximun is 10");
-				return false;
-			}
-
-			_this.GreetingStore._addGreeting({
+			var greetingWidget = new _GreetingWidget();
+			greetingWidget.processCreate({
 				guestBookName: _this.signGuestBookName.get('value'),
 				textGreeting: _this.inputGreeting.get('value')
-			}, function (error, data) {
+			}, function(error, data){
 				if(error){
 					alert("Add Greeting fail");
 				}else{
-					alert("Add Greeting successful");
 					_this.signGuestBookName.set('value', '');
 					_this.inputGreeting.set('value', '');
 					_this.loadGreetingList(null);
