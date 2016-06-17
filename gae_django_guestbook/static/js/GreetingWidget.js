@@ -45,17 +45,19 @@ define([
 				alert("You can not  update");
 				return;
 			}
-			this.contentEditNode.set('readonly', false);
-			domStyle.set(this.btnEdit, "display", "none");
-			domStyle.set(this.btnSave, "display", "inline-block");
-			domStyle.set(this.btnCancel, "display", "inline-block");
+			this.displayEditForm(true);
 		},
 
 		processCancel: function () {
-			this.contentEditNode.set('readonly', true);
-			domStyle.set(this.btnEdit, "display", "inline-block");
-			domStyle.set(this.btnSave, "display", "none");
-			domStyle.set(this.btnCancel, "display", "none");
+			this.contentEditNode.set('value', this.content);
+			this.displayEditForm(false);
+		},
+
+		displayEditForm: function (display) {
+			this.contentEditNode.set('readonly', !display);
+			domStyle.set(this.btnEdit, "display", display ? "none" : "inline-block");
+			domStyle.set(this.btnSave, "display", display ? "inline-block" : "none");
+			domStyle.set(this.btnCancel, "display", display ? "inline-block" : "none");
 		},
 
 		processDelete: function () {
