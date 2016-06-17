@@ -8,12 +8,13 @@ define([
 	"dojo/dom",
 	"dojo/on",
 	"dojo/store/JsonRest",
+	"dojo/topic",
 	"dijit/form/TextBox",
 	"greeting/_ViewBase",
 	"greeting/GreetingWidget",
 	"greeting/GreetingStore",
 	"dojo/text!./templates/GuestBookView.html"
-], function (declare, lang, domConstruct, dom, on, JsonRest, TextBox,
+], function (declare, lang, domConstruct, dom, on, JsonRest, topic, TextBox,
 			 _ViewBase, _GreetingWidget, GreetingStore, template) {
 
 	return declare('guestbook.GuestBookView', [_ViewBase], {
@@ -36,6 +37,12 @@ define([
 			on(this.btnSwitch, "click", lang.hitch(this, 'processSearch'));
 			on(this.btnAdd, "click", lang.hitch(this, 'processAdd'));
 
+			var _this = this;
+			var handle = topic.subscribe("guestbook/topic", function (e) {
+				_this.loadGreetingList(null);
+				handle.remove();
+			});
+
 		},
 
 		initGuestBook: function () {
@@ -55,10 +62,10 @@ define([
 			greetingWidget.processCreate({
 				guestBookName: _this.signGuestBookName.get('value'),
 				textGreeting: _this.inputGreeting.get('value')
-			}, function(error, data){
-				if(error){
+			}, function (error, data) {
+				if (error) {
 					alert("Add Greeting fail");
-				}else{
+				} else {
 					_this.signGuestBookName.set('value', '');
 					_this.inputGreeting.set('value', '');
 					_this.loadGreetingList(null);
@@ -84,16 +91,7 @@ define([
 				_this.greetingTotal.innerHTML = results.greetings.length + ' Items';
 				if (results.greetings) {
 					for (var i = 0; i < results.greetings.length; i++) {
-						var greetingWidget = new _GreetingWidget({
-							content: results.greetings[i].content || '',
-							createdTime: results.greetings[i].date || '',
-							updatedTime: results.greetings[i].updated_date || '',
-							createdUser: results.greetings[i].user || '',
-							updatedUser: results.greetings[i].updated_by || '',
-							guestBookName: _this.getGuestBookName(false),
-							id_greeting: results.greetings[i].id_greeting || '',
-							_GuestBookViewObj: _this
-						});
+						var greetingWidget = new _GreetingWidget(results.greetings[i], _this.getGuestBookName(false));
 						domConstruct.place(greetingWidget.domNode, _this.greetingListNode);
 					}
 				}

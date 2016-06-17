@@ -8,12 +8,12 @@ define([
 	"dojo/dom",
 	"dojo/dom-style",
 	"dojo/dom-attr",
-	"dijit/registry",
+	"dojo/topic",
 	"dijit/form/TextBox",
 	"greeting/_ViewBase",
 	"greeting/GreetingStore",
 	"dojo/text!./templates/GreetingWidget.html"
-], function (declare, lang, on, dom, domStyle, domAttr, registry, TextBox, _ViewBase, GreetingStore, template) {
+], function (declare, lang, on, dom, domStyle, domAttr, topic, TextBox, _ViewBase, GreetingStore, template) {
 
 	return declare('guestbook.GreetingWidget', [_ViewBase], {
 		templateString: template,
@@ -25,13 +25,23 @@ define([
 		id_greeting: '',
 
 		guestBookName: '',
-		_GuestBookViewObj: null,
-
 		addGuestBookName: '',
 		addGreetingContent: '',
 
-		constructor: function () {
+		constructor: function (obj, guestBookName) {
 			this.inherited(arguments);
+			if (obj) {
+				this.content = obj.content || '';
+				this.createdTime = obj.date || '';
+				this.updatedTime = obj.updated_date || '';
+				this.createdUser = obj.user || '';
+				this.updatedUser = obj.updated_by || '';
+				this.id_greeting = obj.id_greeting || '';
+			}
+
+			if (guestBookName) {
+				this.guestBookName = guestBookName;
+			}
 		},
 
 		postCreate: function () {
@@ -61,7 +71,7 @@ define([
 			domStyle.set(this.btnCancel, "display", display ? "inline-block" : "none");
 		},
 
-		processCreate: function(obj, callback){
+		processCreate: function (obj, callback) {
 			if (obj.guestBookName.length == 0 || obj.textGreeting.length == 0) {
 				alert("Please Input data");
 				return false;
@@ -78,10 +88,10 @@ define([
 				guestBookName: obj.guestBookName,
 				textGreeting: obj.textGreeting
 			}, function (error, data) {
-				if(error){
+				if (error) {
 					alert("Add Greeting fail");
 					callback(true, null);
-				}else{
+				} else {
 					alert("Add Greeting successful");
 					callback(null, data);
 				}
@@ -101,10 +111,10 @@ define([
 					guestBookName: _this.guestBookName,
 					id_greeting: _this.id_greeting
 				}, function (error, results) {
-					if(error){
+					if (error) {
 						alert("Delete Greeting fail");
-					}else{
-						_this._GuestBookViewObj.loadGreetingList(null);
+					} else {
+						topic.publish("guestbook/topic", "loadList");
 					}
 				});
 			}
