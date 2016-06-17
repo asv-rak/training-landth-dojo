@@ -55,11 +55,11 @@ define([
 
 		processAdd: function () {
 			var _this = this;
-			if(_this.signGuestBookName.get('value').length == 0 || _this.inputGreeting.get('value').length == 0){
+			if (_this.signGuestBookName.get('value').length == 0 || _this.inputGreeting.get('value').length == 0) {
 				alert("Please Input data");
 				return false;
 			}
-			if(_this.signGuestBookName.get('value').length > 10 || _this.inputGreeting.get('value').length > 10){
+			if (_this.signGuestBookName.get('value').length > 10 || _this.inputGreeting.get('value').length > 10) {
 				alert("The text - Maximun is 10");
 				return false;
 			}

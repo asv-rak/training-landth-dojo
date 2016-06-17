@@ -4,15 +4,14 @@
 define([
 	"dojo/_base/declare",
 	"dojo/cookie",
-	"dojo/store/JsonRest",
+	"dojo/store/JsonRest"
 ], function (declare, cookie, JsonRest) {
 	return declare("guestbook.GreetingStore", null, {
 		guestbookName: "default_guestbook",
 		store: null,
-		
-		constructor: function(){
-			this.inherited(arguments);
-			var url = "/api/guestbook/"+this.guestbookName+"/greeting/";
+
+		constructor: function () {
+			var url = "/api/guestbook/" + this.guestbookName + "/greeting/";
 			this.store = new JsonRest({
 				target: url,
 				headers: {
@@ -21,31 +20,31 @@ define([
 			});
 		},
 
-		_addGreeting: function(obj, callback){
+		_addGreeting: function (obj, callback) {
 			var url = '/api/guestbook/' + obj.guestBookName + '/greeting/';
 			this.store.target = url;
 			this.store.add({
 				guestbook_name: obj.guestBookName,
 				content: obj.textGreeting
-			}).then(function(data){
+			}).then(function (data) {
 				callback(null, data);
 			});
 
 		},
 
-		_updateGreeting: function(obj, callback){
+		_updateGreeting: function (obj, callback) {
 			var url = '/api/guestbook/' + obj.guestBookName + '/greeting/';
 			this.store.target = url;
 			this.store.put({
 				greeting_content: obj.textGreeting
 			}, {
 				id: obj.id_greeting
-			}).then(function(data){
+			}).then(function (data) {
 				callback(null, data);
 			});
 		},
 
-		_getListGreeting: function(obj, callback){
+		_getListGreeting: function (obj, callback) {
 			var url = '/api/guestbook/' + obj.guestBookName + '/greeting/';
 			this.store.target = url;
 			this.store.query().then(function (data) {
@@ -53,10 +52,11 @@ define([
 			});
 		},
 
-		_deleteGreeting: function(obj, callback){
+		_deleteGreeting: function (obj, callback) {
 			var url = '/api/guestbook/' + obj.guestBookName + '/greeting/';
 			this.store.target = url;
-			this.store.remove(obj.id_greeting).then(function(data){
+			this.store.remove(obj.id_greeting).then(function (data) {
+				console.log(data);
 				callback(null, data);
 			});
 		}
