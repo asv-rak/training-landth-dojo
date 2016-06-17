@@ -1,14 +1,21 @@
 <div class="mainWidget">
-	<form class="${greetingClass}Wrap">
+	<div class="${greetingClass}Wrap">
 		<h2>Add new Greeting</h2>
-		<label>GuestBook Name: </label><select data-dojo-attach-point="guestBookNameListNode" title="Guestbook Name"></select>
-		<label>Greeting: </label><input data-dojo-attach-point="inputGreeting"  name="inputGreeting" value="${greetingContent}" placeholder="input text greeting"/>
-		<input type="submit" id="btnAdd" name="btnAdd" value="Add" />
-	</form>
+		<div style="margin-bottom: 5px;">
+			<label>GuestBook Name: </label>
+			<input style="width: 198px;" placeholder="Guestbook name" data-dojo-attach-point="signGuestBookName" data-dojo-type="dijit/form/TextBox" value=""/>
+		</div>
+		<div>
+			<label>Greeting: </label>
+			<input style="width: 257px;" data-dojo-attach-point="inputGreeting" data-dojo-type="dijit/form/TextBox" name="inputGreeting" value="${greetingContent}" placeholder="input text greeting"/>
+			<input type="submit" data-dojo-attach-point="btnAdd" name="btnAdd" value="Add" />
+		</div>
+
+	</div>
 	<div class="${guestBookClass}Wrap">
 		<h2>List Greeting</h2>
 		<div id="${guestBookClass}Form">
-			<input placeholder="Guestbook name" data-dojo-attach-point="inputGuestBookName" data-dojo-type="dijit/form/TextBox" value="${guestBookName}"/>
+			<input style="width: 320px" placeholder="Guestbook name" data-dojo-attach-point="inputGuestBookName" data-dojo-type="dijit/form/TextBox" value="${guestBookName}"/>
 			<input type="submit" data-dojo-attach-point="btnSwitch" name="btnSwitch" value="Switch"/>
 		</div>
 		<div class="resultInfo">

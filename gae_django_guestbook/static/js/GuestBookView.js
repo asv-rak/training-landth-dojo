@@ -13,10 +13,14 @@ define([
 	"dojo/request",
 	"dojo/cookie",
 	"dojo/store/JsonRest",
+	"dojo/Deferred",
+	"greeting/GreetingStore",
 	"dijit/form/TextBox"
-], function (declare, lang, _ViewBase, template, domConstruct, dom, on, _GreetingWidget, request, cookie, JsonRest) {
+], function (declare, lang, _ViewBase, template, domConstruct, dom, on, _GreetingWidget,
+			 request, cookie, JsonRest, Deferred, GreetingStore) {
 
 	return declare('guestbook.GuestBookView', [_ViewBase], {
+
 
 		templateString: template,
 
@@ -28,31 +32,47 @@ define([
 
 		greetingContent: '',
 		guestBookName: 'default_guestbook',
-		store: '',
+		GreetingStore: '',
 
 		postCreate: function () {
+
 			this.initGuestBook();
 			on(this.btnSwitch, "click", lang.hitch(this, 'processSearch'));
+			on(this.btnAdd, "click", lang.hitch(this, 'processAdd'));
 
 		},
 
 		initGuestBook: function () {
-			for (var i = 1; i <= 10; i++) {
-				var option = this.guestBookNameListNode.appendChild(domConstruct.toDom('<option>' + i + '</option>'));
-			}
-
-			this.store = new JsonRest({});
-			var url = '/api/guestbook/' + this.getGuestBookName(true) + '/greeting/';
-			this.loadGreetingList(url);
+			this.GreetingStore = new GreetingStore();
+			this.loadGreetingList(null);
 		},
 
 		getGuestBookName: function (isDefault) {
 			var tmpGuestBookName = (isDefault == true) ? 'default_guestbook' : '0';
-			return (this.inputGuestBookName.get("value") ? this.inputGuestBookName.get("value") : tmpGuestBookName );
+			return (this.inputGuestBookName.get("value") ?
+				this.inputGuestBookName.get("value") : tmpGuestBookName );
 		},
 
-		processEdit: function () {
-			domStyle.set(this.btnEdit, "display", "none");
+		processAdd: function () {
+			var _this = this;
+			if(_this.signGuestBookName.get('value').length == 0 || _this.inputGreeting.get('value').length == 0){
+				alert("Please Input data");
+				return false;
+			}
+			if(_this.signGuestBookName.get('value').length > 10 || _this.inputGreeting.get('value').length > 10){
+				alert("The text - Maximun is 10");
+				return false;
+			}
+
+			_this.GreetingStore._addGreeting({
+				guestBookName: _this.signGuestBookName.get('value'),
+				textGreeting: _this.inputGreeting.get('value')
+			}, function (error, data) {
+				alert("Add Greeting successful");
+				_this.signGuestBookName.set('value', '');
+				_this.inputGreeting.set('value', '');
+				_this.loadGreetingList(null);
+			});
 		},
 
 		processSearch: function () {
@@ -60,30 +80,16 @@ define([
 			this.loadGreetingList(url);
 		},
 
-		processDeleteGreeting: function (greetingId, guestBookName) {
-			var url = '/api/guestbook/' + guestBookName + '/greeting/';
-			this.store.target = url;
-			this.store.headers = {"X-CSRFToken": cookie("csrftoken")};
-			return this.store.remove(greetingId);
-		},
-
-		processUpdateGreeting: function(greetingId, guestBookName, textGreeting){
-			var url = '/api/guestbook/' + guestBookName + '/greeting/';
-			this.store.target = url;
-			this.store.headers = {"X-CSRFToken": cookie("csrftoken")};
-			return this.store.put({
-				greeting_content: textGreeting
-			}, {
-				id: greetingId
-			});
-		},
-
 		loadGreetingList: function (url) {
-			this.store.target = url;
-			this.store.headers = {"X-CSRFToken": cookie("csrftoken")};
+			if (url == null) {
+				url = '/api/guestbook/' + this.getGuestBookName(true) + '/greeting/';
+			}
 			var _this = this;
 			_this.greetingListNode.innerHTML = '';
-			this.store.query().then(function (results) {
+
+			this.GreetingStore._getListGreeting({
+				guestBookName: _this.getGuestBookName(true)
+			}, function (error, results) {
 				_this.greetingTotal.innerHTML = results.greetings.length + ' Items';
 				if (results.greetings) {
 					for (var i = 0; i < results.greetings.length; i++) {
