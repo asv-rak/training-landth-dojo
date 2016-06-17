@@ -1,0 +1,32 @@
+<div class="greetingWidget">
+	<div>
+		<div class="row">
+			<label>Created Date:</label>
+			<span>${createdTime}</span>
+		</div>
+		<div class="row">
+			<label>Created User: </label>
+			<span>${createdUser}</span>
+		</div>
+	</div>
+	<div>
+		<label>Content:</label>
+		<input  type="text" class="inputGreeting"  value="${content}" data-dojo-type="dijit/form/TextBox" data-dojo-attach-point="contentEditNode"/>
+	</div>
+	<div>
+		<div class="row">
+			<label>Updated Date:</label>
+			<span>${updatedTime}</span>
+		</div>
+		<div class="row">
+			<label>Updated User: </label>
+			<span>${updatedUser}</span>
+		</div>
+		<div class="row">
+			<button data-dojo-attach-point="btnEdit">Edit</button>
+			<button data-dojo-attach-point="btnSave" style="display: none">Save</button>
+			<button data-dojo-attach-point="btnCancel" style="display: none">Cancel</button>
+			<button data-dojo-attach-point="btnDelete">Delete</button>
+		</div>
+	</div>
+</div>

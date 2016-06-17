@@ -1,0 +1,19 @@
+<div class="mainWidget">
+	<form class="${greetingClass}Wrap">
+		<h2>Add new Greeting</h2>
+		<label>GuestBook Name: </label><select data-dojo-attach-point="guestBookNameListNode" title="Guestbook Name"></select>
+		<label>Greeting: </label><input data-dojo-attach-point="inputGreeting"  name="inputGreeting" value="${greetingContent}" placeholder="input text greeting"/>
+		<input type="submit" id="btnAdd" name="btnAdd" value="Add" />
+	</form>
+	<div class="${guestBookClass}Wrap">
+		<h2>List Greeting</h2>
+		<div id="${guestBookClass}Form">
+			<input placeholder="Guestbook name" data-dojo-attach-point="inputGuestBookName" data-dojo-type="dijit/form/TextBox" value="${guestBookName}"/>
+			<input type="submit" data-dojo-attach-point="btnSwitch" name="btnSwitch" value="Switch"/>
+		</div>
+		<div class="resultInfo">
+			<label>Result: </label><span data-dojo-attach-point="greetingTotal"></span>
+		</div>
+		<div class="${guestBookClass}List" data-dojo-attach-point="greetingListNode"></div>
+	</div>
+</div>
