@@ -64,10 +64,14 @@ define([
 				guestBookName: _this.signGuestBookName.get('value'),
 				textGreeting: _this.inputGreeting.get('value')
 			}, function (error, data) {
-				alert("Add Greeting successful");
-				_this.signGuestBookName.set('value', '');
-				_this.inputGreeting.set('value', '');
-				_this.loadGreetingList(null);
+				if(error){
+					alert("Add Greeting fail");
+				}else{
+					alert("Add Greeting successful");
+					_this.signGuestBookName.set('value', '');
+					_this.inputGreeting.set('value', '');
+					_this.loadGreetingList(null);
+				}
 			});
 		},
 

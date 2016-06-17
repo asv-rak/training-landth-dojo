@@ -11,7 +11,7 @@ define([
 	"dijit/registry",
 	"dijit/form/TextBox",
 	"greeting/_ViewBase",
-	"dojo/text!./templates/GreetingWidget.html",
+	"dojo/text!./templates/GreetingWidget.html"
 ], function (declare, lang, on, dom, domStyle, domAttr, registry, TextBox, _ViewBase, template) {
 
 	return declare('guestbook.GreetingWidget', [_ViewBase], {
@@ -70,7 +70,11 @@ define([
 					guestBookName: _this.guestBookName,
 					id_greeting: _this.id_greeting
 				}, function (error, results) {
-					_this._GuestBookViewObj.loadGreetingList(null);
+					if(error){
+						alert("Delete Greeting fail");
+					}else{
+						_this._GuestBookViewObj.loadGreetingList(null);
+					}
 				});
 			}
 		},
@@ -87,7 +91,7 @@ define([
 					domStyle.set(_this.btnEdit, "display", "inline-block");
 					domStyle.set(_this.btnSave, "display", "none");
 					domStyle.set(_this.btnCancel, "display", "none");
-					alert("Update Greeting successful");
+					alert(error ? "Update Greeting fail" : "Update Greeting successful");
 				});
 			} else {
 				alert("String length - Maximun 10 - Minimun 1");
