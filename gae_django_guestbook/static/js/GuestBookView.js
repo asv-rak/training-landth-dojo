@@ -66,6 +66,7 @@ define([
 				if (error) {
 					alert("Add Greeting fail");
 				} else {
+					alert("Add Greeting successful");
 					_this.signGuestBookName.set('value', '');
 					_this.inputGreeting.set('value', '');
 					_this.loadGreetingList(null);
@@ -88,11 +89,15 @@ define([
 			this.GreetingStore._getListGreeting({
 				guestBookName: _this.getGuestBookName(true)
 			}, function (error, results) {
-				_this.greetingTotal.innerHTML = results.greetings.length + ' Items';
-				if (results.greetings) {
-					for (var i = 0; i < results.greetings.length; i++) {
-						var greetingWidget = new _GreetingWidget(results.greetings[i], _this.getGuestBookName(false));
-						domConstruct.place(greetingWidget.domNode, _this.greetingListNode);
+				if (error) {
+					_this.greetingListNode.innerHTML = 'Can not load list greeting!!!'
+				} else {
+					_this.greetingTotal.innerHTML = results.greetings.length + ' Items';
+					if (results.greetings) {
+						for (var i = 0; i < results.greetings.length; i++) {
+							var greetingWidget = new _GreetingWidget(results.greetings[i], _this.getGuestBookName(false));
+							domConstruct.place(greetingWidget.domNode, _this.greetingListNode);
+						}
 					}
 				}
 			});

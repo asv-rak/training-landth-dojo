@@ -88,13 +88,7 @@ define([
 				guestBookName: obj.guestBookName,
 				textGreeting: obj.textGreeting
 			}, function (error, data) {
-				if (error) {
-					alert("Add Greeting fail");
-					callback(true, null);
-				} else {
-					alert("Add Greeting successful");
-					callback(null, data);
-				}
+				callback(error, data);
 			});
 		},
 
@@ -129,11 +123,14 @@ define([
 					id_greeting: _this.id_greeting,
 					textGreeting: _this.contentEditNode.get('value')
 				}, function (error, results) {
+					alert(error ? "Update Greeting fail" : "Update Greeting successful");
+					if (error) {
+						_this.contentEditNode.set('value', _this.content);
+					}
 					_this.contentEditNode.set('readonly', true);
 					domStyle.set(_this.btnEdit, "display", "inline-block");
 					domStyle.set(_this.btnSave, "display", "none");
 					domStyle.set(_this.btnCancel, "display", "none");
-					alert(error ? "Update Greeting fail" : "Update Greeting successful");
 				});
 			} else {
 				alert("String length - Maximun 10 - Minimun 1");

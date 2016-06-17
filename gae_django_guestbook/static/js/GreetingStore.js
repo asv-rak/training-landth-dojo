@@ -4,8 +4,9 @@
 define([
 	"dojo/_base/declare",
 	"dojo/cookie",
-	"dojo/store/JsonRest"
-], function (declare, cookie, JsonRest) {
+	"dojo/store/JsonRest",
+	"dojo/Deferred"
+], function (declare, cookie, JsonRest, Deferred) {
 	return declare("guestbook.GreetingStore", null, {
 		guestbookName: "default_guestbook",
 		store: null,
@@ -28,6 +29,8 @@ define([
 				content: obj.textGreeting
 			}).then(function (data) {
 				callback(null, data);
+			}, function (error) {
+				callback(error, null);
 			});
 
 		},
@@ -41,6 +44,8 @@ define([
 				id: obj.id_greeting
 			}).then(function (data) {
 				callback(null, data);
+			}, function (error) {
+				callback(error, null);
 			});
 		},
 
@@ -49,6 +54,8 @@ define([
 			this.store.target = url;
 			this.store.query().then(function (data) {
 				callback(null, data)
+			}, function (error) {
+				callback(error, null);
 			});
 		},
 
@@ -56,11 +63,10 @@ define([
 			var url = '/api/guestbook/' + obj.guestBookName + '/greeting/';
 			this.store.target = url;
 			this.store.remove(obj.id_greeting).then(function (data) {
-				console.log(data);
 				callback(null, data);
+			}, function (error) {
+				callback(error, null);
 			});
 		}
-
-
 	});
 });
